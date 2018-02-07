@@ -48,6 +48,9 @@ function onWindowLoad() {
     });
 
     $('.btn-send').click(function(){
+        $('#total-render').html('');
+        $('#apt-price').css({'display':'none'});
+        $('body').showLoading();
         console.log(moment());
         var markedYear = '2004',
             currentYear = moment().format('YYYY'),
@@ -92,6 +95,8 @@ function onWindowLoad() {
                     + $($('#부동산소지역코드').children(':selected')[0]).text() + ' '
                     +$($('#물건식별자').children(':selected')[0]).text());
                 $('#temp-render').html('');
+                $('#apt-price').css({'display':'table'});
+                $('body').hideLoading();
             }
         }
 
