@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            width:620px;
+            padding:0;
+        }
+        .info {
+            margin:0;
+        }
+        .earning-rate{
+            margin:0;
+        }
+        .earning-rate table tbody tr td{
+            vertical-align: middle;
+        }
+        .investment-text{
+            font-weight:bold;
+            color: #ff2a2e;
+        }
+        .monthly-money-text{
+            font-weight:bold;
+            color: #247aff;
+        }
+        .base-rate{
+            font-weight:bold;
+            color: #009023;
+        }
+        .leverage-rate{
+            font-weight:bold;
+            color: #009023;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="tableexport/js/tableexport.min.js"></script>
+    <script src="moment.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="popup.js"></script>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="tableexport/css/tableexport.min.css" rel="stylesheet" media="screen">
+</head>
+<body>
+    <div class="panel panel-default info">
+        <div class="panel-heading">KB 시세 긁어오기</div>
+        <div class="panel-body">
+            <form class="form">
+                <div class="form-group">
+                    <label class="control-label">주소</label><input class="form-control" name="url" />
+                </div>
+                <div class="form-group">
+                    <div class="btn btn-success btn-send">불러오기</div> <div class="btn btn-success btn-excel pull-right">Excel 다운로드</div>
+                </div>
+            </form>
+            <hr>
+            <table class="table table-bordered table-condensed" id="apt-price">
+                <thead>
+                    <tr><th colspan="7" id="apt-name"></th></tr>
+                    <tr><th rowspan="2">기준월</th><th colspan="3">매매가(만원)</th><th colspan="3">전세가(만원)</th></tr>
+                    <tr><th>하위평균가</th><th>일반평균가</th><th>상위평균가</th><th>하위평균가</th><th>일반평균가</th><th>상위평균가</th></tr>
+                </thead>
+                <tbody id="total-render"></tbody>
+            </table>
+        </div>
+    </div>
+    <div style="" id="temp-render"></div>
+    <iframe id="txtArea1" style="display:none"></iframe>
+</body>
+</html>
