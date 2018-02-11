@@ -10,7 +10,7 @@
 
     <style>
         body{
-            width:620px;
+            width:700px;
             padding:0;
         }
         table#apt-price thead tr th, table#apt-price tbody tr th{
@@ -28,6 +28,7 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="popup.js"></script>
     <script type="text/javascript" src="showLoading/js/jquery.showLoading.js"></script>
+    <script src="Chart.bundle.min.js"></script>
 
 </head>
 <body>
@@ -42,6 +43,12 @@
                 <div class="btn btn-success btn-send">불러오기</div> <div class="btn btn-success btn-excel pull-right">Excel 다운로드</div>
             </div>
         </form>
+        <hr>
+        <div style="overflow-x: auto;overflow-y: hidden;height: 350px;">
+            <div style="position:relative;height:300px;width:670px;">
+                <canvas id="chart"></canvas>
+            </div>
+        </div>
         <hr>
         <table class="table table-bordered table-condensed text-center" id="apt-price" style="display: none;">
             <thead>

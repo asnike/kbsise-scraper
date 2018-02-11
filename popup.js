@@ -96,9 +96,11 @@ function onWindowLoad() {
                     +$($('#물건식별자').children(':selected')[0]).text());
                 $('#temp-render').html('');
                 $('#apt-price').css({'display':'table'});
+                createPriceChart();
                 $('body').hideLoading();
             }
         }
+        
 
         function getData(param){
             var query = '&조회시작년도='+param.startYear+'&조회시작월='+param.startMonth+'&조회종료년도='+param.endYear+'&조회종료월='+param.endMonth;
@@ -110,6 +112,57 @@ function onWindowLoad() {
                     $(result).appendTo('#temp-render');
                     start();
                 });
+        }
+    });
+}
+function createPriceChart(){
+    var lists = $('#total-render').children();
+    console.log('lists : ', lists);
+    for(var datas = [[], [], []], k = 0, l = 2 ; k < l ; k++){
+        for(var i = lists.length - 1, j = 0 ; i > j ; i--){
+            datas[k][datas[k].length] = parseInt($(lists[i]).children(':nth-child(' + (k == 0 ? '3':'6') + ')').text().replace(/\,/g, ''));
+        }
+    }
+    for(var i = 0, j = datas[0].length ; i < j ; i++){
+        datas[2][datas[2].length] = datas[0][i] - datas[1][i];
+    }
+    for(var labels = [], i = lists.length - 1, j = 0 ; i > j ; i--){
+        labels[labels.length] = $(lists[i]).children(':nth-child(1)').text();
+    }
+
+    new Chart($('#chart'), {
+        type:'bar',
+        data:{
+            datasets:[{
+                label:'매매가',
+                data:datas[0],
+                type:'line',
+                borderColor:'rgba(240, 72, 100, 1)',
+                backgroundColor:'rgba(1,1,1,0)'
+            },{
+                label:'전세가',
+                data:datas[1],
+                type:'line',
+                borderColor:'rgba(72, 139, 240, 1)',
+                backgroundColor:'rgba(1,1,1,0)'
+            },{
+                label:'매-전',
+                data:datas[2],
+                borderColor:'rgba(173, 240, 72, 1)',
+                backgroundColor:'rgba(204,255,0,1)'
+            }],
+            labels:labels
+        },
+        options:{
+            maintainAspectRatio:false,
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            title: {
+                display: true,
+                text: $('#apt-name').text() +' 매매-전세-갭 그래프'
+            }
         }
     });
 }
